@@ -4,11 +4,13 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject notePrefab;
     public Transform firePoint;
+
     public float shootForce = 10f;
+    public float upwardForce = 2f; // força pra cima
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
@@ -26,6 +28,10 @@ public class PlayerShoot : MonoBehaviour
 
         float direction = transform.localScale.x;
 
-        rb.velocity = new Vector2(direction * shootForce, 0f);
+        // velocidade horizontal + impulso vertical
+        rb.velocity = new Vector2(
+            direction * shootForce,
+            upwardForce
+        );
     }
 }

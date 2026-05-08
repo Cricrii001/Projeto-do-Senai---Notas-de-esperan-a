@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MusicalNote : MonoBehaviour
+public class Colorir : MonoBehaviour
 {
     void Start()
     {
