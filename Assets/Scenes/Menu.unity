@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: 1986723295}
   - component: {fileID: 1986723297}
   - component: {fileID: 1986723296}
+  - component: {fileID: 1986723298}
   m_Layer: 5
   m_Name: PressStart
   m_TagString: Untagged
@@ -616,7 +617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -180, y: 55}
+  m_AnchoredPosition: {x: -36.1, y: 55}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1986723296
@@ -641,8 +642,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Pressione qualquer bot\xE3o"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f66a40f49b664314190bf7ccb06633d9, type: 2}
-  m_sharedMaterial: {fileID: -3802561641228704584, guid: f66a40f49b664314190bf7ccb06633d9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8ce2db589cf001142921410cd6f7be88, type: 2}
+  m_sharedMaterial: {fileID: 6505331609560201718, guid: 8ce2db589cf001142921410cd6f7be88, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -702,7 +703,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -379.81052, w: 0}
+  m_margin: {x: -465.35815, y: -128.46178, z: -474.19086, w: -95.80198}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -716,6 +717,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986723294}
   m_CullTransparentMesh: 1
+--- !u!114 &1986723298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986723294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2b2b456b5b5fb47994d9a916e53fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkSpeed: 3
+  minAlpha: 0.3
+  rotationAmount: 5
+  rotationSpeed: 2
 --- !u!1 &2010139518
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +765,7 @@ MonoBehaviour:
   logo: {fileID: 2091770507}
   pressText: {fileID: 1986723294}
   mainMenu: {fileID: 339845381}
-  targetPosition: {x: -500, y: 100}
+  targetPosition: {x: -450, y: 0}
   moveDuration: 1
   useSmoothStep: 1
 --- !u!4 &2010139520
@@ -778,7 +795,7 @@ GameObject:
   - component: {fileID: 2091770509}
   - component: {fileID: 2091770508}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -823,7 +840,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d83255ca96d786b47aef68f893d49de1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 083bb00a528292a4a93d023cbfd7f4cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class MainMenuController : MonoBehaviour
 {
     [Header("Referências")]
