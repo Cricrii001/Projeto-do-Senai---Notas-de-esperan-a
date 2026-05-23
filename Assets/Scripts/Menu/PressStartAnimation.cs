@@ -6,10 +6,6 @@ public class PressStartAnimation : MonoBehaviour
     public float blinkSpeed = 3f;
     public float minAlpha = 0.3f;
 
-    [Header("Rotação")]
-    public float rotationAmount = 5f;
-    public float rotationSpeed = 2f;
-
     private CanvasGroup canvasGroup;
 
     void Start()
@@ -24,21 +20,12 @@ public class PressStartAnimation : MonoBehaviour
 
     void Update()
     {
-        // pisca
         float alpha = Mathf.Lerp(
             minAlpha,
             1f,
-            (Mathf.Sin(Time.time * blinkSpeed) + 1) / 2
+            (Mathf.Sin(Time.time * blinkSpeed) + 1f) / 2f
         );
 
         canvasGroup.alpha = alpha;
-
-        // gira para os lados
-        float rotation =
-            Mathf.Sin(Time.time * rotationSpeed)
-            * rotationAmount;
-
-        transform.rotation =
-            Quaternion.Euler(0, 0, rotation);
     }
 }
