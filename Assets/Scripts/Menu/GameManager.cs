@@ -3,56 +3,66 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public string classeSelecionada;
+
     private void Awake()
     {
-        // Mantém este objeto entre cenas
+        // Singleton simples (evita duplicar entre cenas)
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        // Garante que o jogo nunca comece pausado
         Time.timeScale = 1f;
     }
 
-    // Carrega qualquer cena pelo nome
+    // 🔥 CHAMADA PRINCIPAL (usada pelo botão sprite)
     public void CarregarCena(string nomeCena)
     {
+        Debug.Log("CHAMOU: " + nomeCena);
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(nomeCena);
     }
 
-    // Reinicia a cena atual
     public void ReiniciarCena()
     {
         Time.timeScale = 1f;
-
         Scene cenaAtual = SceneManager.GetActiveScene();
         SceneManager.LoadScene(cenaAtual.name);
     }
 
-    // Pausa jogo
     public void PausarJogo()
     {
         Time.timeScale = 0f;
     }
 
-    // Continua jogo
     public void ContinuarJogo()
     {
         Time.timeScale = 1f;
     }
 
-    // Alterna pausa
     public void AlternarPausa()
     {
         Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
     }
 
-    // Fecha jogo
     public void SairJogo()
     {
-        Application.Quit();
         Debug.Log("Jogo fechado");
+        Application.Quit();
+    }
+
+    public void SelecionarClasse(string classe)
+    {
+        classeSelecionada = classe;
     }
 }

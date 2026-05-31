@@ -12,71 +12,81 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 originalScale;
 
-    // Painel de missões
     public GameObject painelMissoes;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // salva a escala inicial do personagem
         originalScale = transform.localScale;
+
+        AplicarClasse(); // 🔥 AQUI
+    }
+
+    void AplicarClasse()
+    {
+        if (GameManager.Instance == null) return;
+
+        string classe = GameManager.Instance.classeSelecionada;
+
+        Debug.Log("Classe recebida: " + classe);
+
+        if (classe == "Artista")
+        {
+            speed = 4f;
+            jumpForce = 9f;
+        }
+        else if (classe == "Rapper")
+        {
+            speed = 6f;
+            jumpForce = 8f;
+        }
+        else
+        {
+            speed = 5f;
+            jumpForce = 8f;
+        }
     }
 
     void Update()
     {
-    // Abrir/fechar missões com M
-    if (Input.GetKeyDown(KeyCode.M))
-    {
-        painelMissoes.SetActive(
-            !painelMissoes.activeSelf
-        );
-
-        Time.timeScale = painelMissoes.activeSelf ? 0 : 1;
-    }
-
-    // Se o jogo estiver pausado, para aqui
-    if (Time.timeScale == 0)
-        return;
-
-    movement = Input.GetAxisRaw("Horizontal");
-
-    // virar player sem alterar tamanho
-    Vector3 scale = originalScale;
-
-    if (movement > 0)
-    {
-        scale.x = Mathf.Abs(originalScale.x);
-    }
-    else if (movement < 0)
-    {
-        scale.x = -Mathf.Abs(originalScale.x);
-    }
-
-    transform.localScale = scale;
-
-    // pulo
-    if ((Input.GetKeyDown(KeyCode.UpArrow) ||
-         Input.GetKeyDown(KeyCode.W))
-         && isGrounded)
+        if (Input.GetKeyDown(KeyCode.M))
         {
-        rb.velocity = new Vector2(
-            rb.velocity.x,
-            jumpForce
-        );
+            painelMissoes.SetActive(!painelMissoes.activeSelf);
+            Time.timeScale = painelMissoes.activeSelf ? 0 : 1;
+        }
+
+        if (Time.timeScale == 0)
+            return;
+
+        movement = Input.GetAxisRaw("Horizontal");
+
+        Vector3 scale = originalScale;
+
+        if (movement > 0)
+        {
+            scale.x = Mathf.Abs(originalScale.x);
+        }
+        else if (movement < 0)
+        {
+            scale.x = -Mathf.Abs(originalScale.x);
+        }
+
+        transform.localScale = scale;
+
+        if ((Input.GetKeyDown(KeyCode.UpArrow) ||
+             Input.GetKeyDown(KeyCode.W))
+             && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
     void FixedUpdate()
     {
-        // impede movimento quando o painel estiver aberto
         if (Time.timeScale == 0)
             return;
 
-        rb.velocity = new Vector2(
-            movement * speed,
-            rb.velocity.y
-        );
+        rb.velocity = new Vector2(movement * speed, rb.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
