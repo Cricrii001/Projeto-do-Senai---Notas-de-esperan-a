@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,19 +7,32 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     public Image healthFill;
+    public GameObject gameOverPanel;
+
+    private bool isDead = false;
+    private SpriteRenderer sr;
 
     void Start()
     {
         currentHealth = maxHealth;
+        sr = GetComponent<SpriteRenderer>();
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
         UpdateBar();
     }
 
     public void TakeDamage(int dmg)
     {
+        if (isDead) return;
+
         currentHealth -= dmg;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         UpdateBar();
+
+        Debug.Log("Vida atual: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -30,8 +42,9 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateBar()
     {
-        float percent = (float)currentHealth / maxHealth;
+        if (healthFill == null) return;
 
+        float percent = (float)currentHealth / maxHealth;
         healthFill.fillAmount = percent;
 
         if (percent > 0.6f)
@@ -46,7 +59,25 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("MORREU");
-        SceneManager.LoadScene("Menu");
+        if (isDead) return;
+
+        isDead = true;
+
+        Debug.Log("PLAYER MORREU");
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+            Debug.Log("GameOver ativado: " + gameOverPanel.activeSelf);
+        }
+        else
+        {
+            Debug.LogError("GameOverPanel não atribuído!");
+        }
+
+        if (sr != null)
+            sr.enabled = false;
+
+        Time.timeScale = 0f;
     }
 }

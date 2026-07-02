@@ -33,7 +33,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 hitboxStartPos;
 
     // 🎵 PROJÉTIL
-    public GameObject projectilePrefab;
+    public GameObject projectilePrefab1;
+    public GameObject projectilePrefab2;
+
+    private bool usarPrimeiroProjetil = true;
+
+
+
     public Transform firePoint;
     public float projectileSpeed = 10f;
 
@@ -176,11 +182,20 @@ public class PlayerController : MonoBehaviour
     // Chamado por um Animation Event
     public void ShootProjectile()
     {
-        if (projectilePrefab == null || firePoint == null)
+        if (firePoint == null)
+            return;
+
+        GameObject prefabEscolhido = usarPrimeiroProjetil
+            ? projectilePrefab1
+            : projectilePrefab2;
+
+        usarPrimeiroProjetil = !usarPrimeiroProjetil;
+
+        if (prefabEscolhido == null)
             return;
 
         GameObject projectile = Instantiate(
-            projectilePrefab,
+            prefabEscolhido,
             firePoint.position,
             Quaternion.identity
         );
@@ -199,7 +214,6 @@ public class PlayerController : MonoBehaviour
         if (projectileRb != null)
         {
             float direction = sr.flipX ? -1f : 1f;
-
             projectileRb.velocity = new Vector2(direction * projectileSpeed, 0);
         }
 
@@ -208,10 +222,8 @@ public class PlayerController : MonoBehaviour
         if (projectileSR != null)
         {
             projectileSR.flipX = sr.flipX;
-            projectileSR.flipY = false; // evita virar de cabeça pra baixo
+            projectileSR.flipY = false;
         }
-
-        
     }
 
     // ==========================
@@ -220,11 +232,18 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (!canTakeDamage) return;
-    
-        GetComponent<PlayerHealth>().TakeDamage(10);
-    
-        StartCoroutine(BlinkPlayer());
+        PlayerHealth health = GetComponent<PlayerHealth>();
+
+        if (health.currentHealth <= 0)
+            return;
+
+        if (!canTakeDamage)
+            return;
+
+        health.TakeDamage(10);
+
+        if (health.currentHealth > 0)
+            StartCoroutine(BlinkPlayer());
     }
 
     System.Collections.IEnumerator BlinkPlayer()
