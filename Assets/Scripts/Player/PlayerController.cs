@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float movement;
 
+    private bool isJumping;
+
     public bool isGrounded;
 
     public GameObject painelMissoes;
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         // Flip do personagem
         if (movement != 0)
-            sr.flipX = movement > 0;
+            sr.flipX = movement < 0;
 
         // 👊 Ataque corpo a corpo
         if (Input.GetKeyDown(KeyCode.J) && isGrounded)
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour
         }
 
         anim.SetFloat("Speed", Mathf.Abs(movement));
-
+        HandleJumpAnimation();
         UpdateHitboxDirection();
     }
 
@@ -251,4 +253,24 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
             isGrounded = false;
     }
+
+    void HandleJumpAnimation()
+    {
+        if (!isGrounded)
+        {
+            isJumping = true;
+            anim.SetBool("isJumping", true);
+        }
+        else
+        {
+            if (isJumping)
+            {
+                isJumping = false;
+                anim.SetBool("isJumping", false);
+            }
+        }
+    }
+
+
+
 }

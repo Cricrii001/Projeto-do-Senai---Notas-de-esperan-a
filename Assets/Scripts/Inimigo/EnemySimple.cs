@@ -4,13 +4,15 @@ public class EnemySimple : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private EnemyHealth health;
 
     public float speed = 2f;
 
     // direção inicial (1 = direita, -1 = esquerda)
     private int direction = -1;
 
-    private EnemyHealth health;
+    private bool canFlip = true;
+    private float flipCooldown = 0.15f;
 
     void Start()
     {
@@ -18,13 +20,19 @@ public class EnemySimple : MonoBehaviour
         anim = GetComponent<Animator>();
         health = GetComponent<EnemyHealth>();
 
-        // 🔥 FLIP INICIAL
+        // 🔥 trava rotação pra não girar bugado
+        rb.freezeRotation = true;
+
         Flip();
     }
 
     void Update()
     {
+        // movimento normal
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+
+        // evita “colar” na parede (leve empurrão pra frente)
+        rb.position += new Vector2(direction * speed * Time.deltaTime, 0);
 
         if (anim != null)
             anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -32,14 +40,14 @@ public class EnemySimple : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // 🧱 PAREDE → vira direção + flip
+        // 🧱 parede
         if (collision.gameObject.CompareTag("Wall"))
         {
             ChangeDirection();
             return;
         }
 
-        // 👤 PLAYER → dano
+        // 👤 player
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
@@ -67,14 +75,25 @@ public class EnemySimple : MonoBehaviour
         }
     }
 
-    // 🔁 troca direção + flip
+    // 🔁 muda direção com cooldown
     void ChangeDirection()
     {
+        if (!canFlip) return;
+
+        canFlip = false;
+
         direction *= -1;
         Flip();
+
+        Invoke(nameof(ResetFlip), flipCooldown);
     }
 
-    // 👀 vira sprite corretamente
+    void ResetFlip()
+    {
+        canFlip = true;
+    }
+
+    // 👀 flip visual correto
     void Flip()
     {
         Vector3 scale = transform.localScale;
