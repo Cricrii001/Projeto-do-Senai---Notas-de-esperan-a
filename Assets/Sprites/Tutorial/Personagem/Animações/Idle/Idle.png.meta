@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idcle_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 137
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19492555dbd292845a3717c3c4a5e2e5
-      internalID: 1865779021
+      spriteID: f070077b7381cb940a250ba2c700a7d1
+      internalID: -984611832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idcle_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 649
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcc5a13f54142db44bbf2c56b76a6ff9
-      internalID: 706627347
+      spriteID: 3c38cd39ab77c94419f8a54128297c11
+      internalID: -721337462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idcle_2
+      name: Idle_2
       rect:
         serializedVersion: 2
         x: 138
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 436efc33762734043b3753ad1171b517
-      internalID: 451132117
+      spriteID: 9d0c28c8ceb5efb4d8fa7ee7affe6709
+      internalID: -1579114110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idcle_3
+      name: Idle_3
       rect:
         serializedVersion: 2
         x: 651
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e21c109c12fed124aab4ea7a7c03e627
-      internalID: 108859370
+      spriteID: 7b4878b633ca2c54a833fc3244086bf1
+      internalID: 1072447406
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idcle_0: 1865779021
-      Idcle_1: 706627347
-      Idcle_2: 451132117
-      Idcle_3: 108859370
+      Idle_0: -984611832
+      Idle_1: -721337462
+      Idle_2: -1579114110
+      Idle_3: 1072447406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

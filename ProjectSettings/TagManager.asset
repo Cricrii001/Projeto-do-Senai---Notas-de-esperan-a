@@ -6,6 +6,8 @@ TagManager:
   tags:
   - "Cen\xE1rio"
   - Ground
+  - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -42,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 1943683239
+    locked: 0
+  - name: 0
+    uniqueID: 2924322887
     locked: 0
