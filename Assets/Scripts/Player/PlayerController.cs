@@ -133,16 +133,14 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Speed", 0);
         anim.SetTrigger("Attack");
 
-        if (attackHitbox != null)
-            attackHitbox.SetActive(true);
+        
     }
 
     public void FimAtaque()
     {
         isAttacking = false;
 
-        if (attackHitbox != null)
-            attackHitbox.SetActive(false);
+       
     }
 
     // ==========================
@@ -290,6 +288,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EnableHitbox()
+    {
+        attackHitbox.SetActive(true);
+    }
 
+    public void DisableHitbox()
+    {
+        attackHitbox.SetActive(false);
+    }
 
 }

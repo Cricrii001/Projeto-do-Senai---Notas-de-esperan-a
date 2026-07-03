@@ -10,7 +10,7 @@ public class BackgroundProgress : MonoBehaviour
     public GameObject player; // 👈 ADICIONADO
 
     [Range(0f, 1f)]
-    public float alphaStep = 0.03f;
+    public float alphaStep = 0.08f;
 
     private float currentAlpha = 0f;
     private bool hasWon = false;
